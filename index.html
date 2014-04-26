@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BarrelAnalytics</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
+<style type="text/css">
+    .top-level{
+    	margin: 50px;
+    }
+    .form-level {
+        position:relative;
+        top:50px;
+    }
+    .response-level {
+        top:50px;
+        width:500px;
+    }
+    .response-title {
+        font-size:14px;
+    }
+    .response-urls {
+      color:gray;
+    }
+    .response-desc {
+        font-size:13px;
+        font-style:italic;
+    }
+    a:link {
+       font-size:12px;
+       color:gray;
+    }
+    .submit-button {
+        position:relative;
+        top:20px;
+        left:25px;
+        width: 170px;
+    }
+    #brand_0 {
+       font-size:28px;
+       color:gold;
+    }
+    #brand_1 {
+       font-size:20px;
+       color:white;
+    }
+</style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand"><span id="brand_0">Barrel</span><span id="brand_1">Analytics</span></a>
+    </div>
+  </nav>
+  <div class="top-level">
+    <div class="form-level col-md-3">
+      <form action="/search" method="post">
+	<div class="input-group">
+	  <label  class="control-label col-xs-2 glyphicon glyphicon-search"></label>
+	  <div class="col-xs-10">
+          <input type="text" name="query" class="form-input form-control" placeholder="Phrase, eg Barack Obama">
+	  </div>
+	</div>
+	<br>
+	
+	<div class="input-group">
+          <label class="control-label col-xs-2 glyphicon glyphicon-globe"></label>
+	  <div class="col-xs-10">
+	    <input type="text" name="location" class="form-input form-control" placeholder="location, country or city">
+	  </div>
+	</div>
+	<br>
+	
+	<div class="input-group">
+	  <div class="col-xs-10">
+	    <button type="submit" class="submit-button btn btn-primary"><label class="glyphicon glyphicon-search"></label> Search</button>
+	  </div>
+	</div>
+      </form>
+    </div>
+    
+    <div  class="col-md-3 response-level">
+      {% if show_response ==  True %} 
+      {% if response_found == True %} 
+      {% for res in response.data.results %}
+      <div class="panel panel-primary">
+        <div class="panel-heading response-title">{{ res.title }}</div>
+        <div class="panel-body">
+          <span class="response-urls"><a href="{{ res.aggregate_link }}" >{{ res.aggregate_link }}</a></span><span class="glyphicon glyphicon-link"></span><br><br>
+          <span class="response-desc">{{ res.description }}</span>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      No results found :( Please try another query.
+      {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>                                		
+{% endautoescape %}
+
