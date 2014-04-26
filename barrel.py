@@ -41,7 +41,7 @@ class SearchPage(webapp2.RequestHandler):
         template_values = {
             'response': response,
             'show_response': True,
-            'response_found': response['data'] is not None and len(response['data']['results']) > 0
+            'response_found': len(response['data']['results']) > 0
         }
 
         template = JINJA_ENVIRONMENT.get_template('index.html')
