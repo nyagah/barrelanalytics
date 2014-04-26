@@ -40,20 +40,24 @@
         left:25px;
         width: 170px;
     }
-    #brand_0 {
+    #brand-0 {
        font-size:28px;
        color:gold;
     }
-    #brand_1 {
+    #brand-1 {
        font-size:20px;
        color:white;
+    }
+    #no-results {
+       font-size:40px;
+       color:red;
     }
 </style>
 </head>
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
-      <a href="#" class="navbar-brand"><span id="brand_0">Barrel</span><span id="brand_1">Analytics</span></a>
+      <a href="#" class="navbar-brand"><span id="brand-0">Barrel</span><span id="brand-1">Analytics</span></a>
     </div>
   </nav>
   <div class="top-level">
@@ -96,7 +100,7 @@
       </div>
       {% endfor %}
       {% else %}
-      No results found :( Please try another query.
+      <div id="no-results">No results found :(<br> Please try another query.</div>
       {% endif %}
       {% endif %}
     </div>
